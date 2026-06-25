@@ -2,9 +2,23 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "ELmNET",
+    "title": "ElmNET",
     "section": "",
     "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "analysen.html",
+    "href": "analysen.html",
+    "title": "analysen.qmd",
+    "section": "",
+    "text": "Zusammenhang zwischen Gewicht und Verbrauch"
+  },
+  {
+    "objectID": "analysen.html#beispielanalyse",
+    "href": "analysen.html#beispielanalyse",
+    "title": "analysen.qmd",
+    "section": "",
+    "text": "Zusammenhang zwischen Gewicht und Verbrauch"
   },
   {
     "objectID": "about.html",
@@ -12,5 +26,19 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "app.html",
+    "href": "app.html",
+    "title": "Interaktive App",
+    "section": "",
+    "text": "Bewege den Regler. Die Grafik wird direkt im Browser neu berechnet.\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 600\n\nlibrary(shiny)\n\nui &lt;- fluidPage(\n  titlePanel(\"ElmNET – interaktive Grafik\"),\n\n  sidebarLayout(\n    sidebarPanel(\n      sliderInput(\n        inputId = \"anzahl\",\n        label = \"Anzahl der Werte:\",\n        min = 10,\n        max = 500,\n        value = 100,\n        step = 10\n      )\n    ),\n\n    mainPanel(\n      plotOutput(\"grafik\")\n    )\n  )\n)\n\nserver &lt;- function(input, output, session) {\n\n  output$grafik &lt;- renderPlot({\n    set.seed(123)\n\n    werte &lt;- rnorm(input$anzahl)\n\n    hist(\n      werte,\n      breaks = 20,\n      main = paste(\"Verteilung von\", input$anzahl, \"Werten\"),\n      xlab = \"Wert\"\n    )\n  })\n}\n\nshinyApp(ui = ui, server = server)"
+  },
+  {
+    "objectID": "app.html#elmnet-interaktive-analyse",
+    "href": "app.html#elmnet-interaktive-analyse",
+    "title": "Interaktive App",
+    "section": "",
+    "text": "Bewege den Regler. Die Grafik wird direkt im Browser neu berechnet.\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 600\n\nlibrary(shiny)\n\nui &lt;- fluidPage(\n  titlePanel(\"ElmNET – interaktive Grafik\"),\n\n  sidebarLayout(\n    sidebarPanel(\n      sliderInput(\n        inputId = \"anzahl\",\n        label = \"Anzahl der Werte:\",\n        min = 10,\n        max = 500,\n        value = 100,\n        step = 10\n      )\n    ),\n\n    mainPanel(\n      plotOutput(\"grafik\")\n    )\n  )\n)\n\nserver &lt;- function(input, output, session) {\n\n  output$grafik &lt;- renderPlot({\n    set.seed(123)\n\n    werte &lt;- rnorm(input$anzahl)\n\n    hist(\n      werte,\n      breaks = 20,\n      main = paste(\"Verteilung von\", input$anzahl, \"Werten\"),\n      xlab = \"Wert\"\n    )\n  })\n}\n\nshinyApp(ui = ui, server = server)"
   }
 ]

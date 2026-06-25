@@ -2,14 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://elmnet-ulaevis.github.io/index.html</loc>
-    <lastmod>2026-06-25T09:42:01.133Z</lastmod>
+    <lastmod>2026-06-25T10:59:42.870Z</lastmod>
+  </url>
+  <url>
+    <loc>https://elmnet-ulaevis.github.io/analysen.html</loc>
+    <lastmod>2026-06-25T11:01:29.090Z</lastmod>
   </url>
   <url>
     <loc>https://elmnet-ulaevis.github.io/about.html</loc>
     <lastmod>2026-06-25T09:42:01.123Z</lastmod>
   </url>
   <url>
-    <loc>https://elmnet-ulaevis.github.io/analysen.html</loc>
-    <lastmod>2026-06-25T09:42:01.123Z</lastmod>
+    <loc>https://elmnet-ulaevis.github.io/app.html</loc>
+    <lastmod>2026-06-25T10:47:07.980Z</lastmod>
   </url>
 </urlset>
