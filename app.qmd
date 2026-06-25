@@ -1,0 +1,59 @@
+---
+title: "Interaktive App"
+engine: knitr
+format:
+  html:
+    embed-resources: false
+filters:
+  - shinylive
+---
+
+## ElmNET – interaktive Analyse
+
+Bewege den Regler. Die Grafik wird direkt im Browser neu berechnet.
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 600
+
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel("ElmNET – interaktive Grafik"),
+
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput(
+        inputId = "anzahl",
+        label = "Anzahl der Werte:",
+        min = 10,
+        max = 500,
+        value = 100,
+        step = 10
+      )
+    ),
+
+    mainPanel(
+      plotOutput("grafik")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+
+  output$grafik <- renderPlot({
+    set.seed(123)
+
+    werte <- rnorm(input$anzahl)
+
+    hist(
+      werte,
+      breaks = 20,
+      main = paste("Verteilung von", input$anzahl, "Werten"),
+      xlab = "Wert"
+    )
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
