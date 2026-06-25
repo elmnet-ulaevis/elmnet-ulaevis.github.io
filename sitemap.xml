@@ -1,27 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://elmnet-ulaevis.github.io/participation.html</loc>
-    <lastmod>2026-06-25T11:48:54.973Z</lastmod>
+    <loc>https://elmnet-ulaevis.github.io/contact.html</loc>
+    <lastmod>2026-06-25T11:48:55.612Z</lastmod>
   </url>
   <url>
     <loc>https://elmnet-ulaevis.github.io/data.html</loc>
     <lastmod>2026-06-25T11:31:16.735Z</lastmod>
   </url>
   <url>
-    <loc>https://elmnet-ulaevis.github.io/analysen.html</loc>
-    <lastmod>2026-06-25T11:01:29.090Z</lastmod>
-  </url>
-  <url>
-    <loc>https://elmnet-ulaevis.github.io/about.html</loc>
-    <lastmod>2026-06-25T09:42:01.123Z</lastmod>
-  </url>
-  <url>
-    <loc>https://elmnet-ulaevis.github.io/contact.html</loc>
-    <lastmod>2026-06-25T11:48:55.612Z</lastmod>
-  </url>
-  <url>
     <loc>https://elmnet-ulaevis.github.io/index.html</loc>
     <lastmod>2026-06-25T11:50:42.494Z</lastmod>
+  </url>
+  <url>
+    <loc>https://elmnet-ulaevis.github.io/participation.html</loc>
+    <lastmod>2026-06-25T11:48:54.973Z</lastmod>
   </url>
 </urlset>

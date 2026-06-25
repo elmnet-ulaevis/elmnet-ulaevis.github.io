@@ -1,17 +1,17 @@
 [
   {
-    "objectID": "participation.html",
-    "href": "participation.html",
-    "title": "Participation",
+    "objectID": "contact.html",
+    "href": "contact.html",
+    "title": "Contact",
     "section": "",
-    "text": "We actively welcome further collaborations and data contributions to improve the spatial coverage and representativeness of the dataset.\nAt least 15 sampled trees per site are required, ideally accompanied by metadata and stand information.\nPre-measured tree-ring data are preferred, but tree cores are equally valuable. Contributions from unusual sites, for example particularly dry stands, are especially welcome."
+    "text": "Andreas Burger\nUniversity of Greifswald\nGreifswald, Germany\nEmail: burger.a@posteo.de"
   },
   {
-    "objectID": "participation.html#section",
-    "href": "participation.html#section",
-    "title": "Participation",
+    "objectID": "contact.html#section",
+    "href": "contact.html#section",
+    "title": "Contact",
     "section": "",
-    "text": "We actively welcome further collaborations and data contributions to improve the spatial coverage and representativeness of the dataset.\nAt least 15 sampled trees per site are required, ideally accompanied by metadata and stand information.\nPre-measured tree-ring data are preferred, but tree cores are equally valuable. Contributions from unusual sites, for example particularly dry stands, are especially welcome."
+    "text": "Andreas Burger\nUniversity of Greifswald\nGreifswald, Germany\nEmail: burger.a@posteo.de"
   },
   {
     "objectID": "data.html",
@@ -26,41 +26,6 @@
     "title": "Data",
     "section": "",
     "text": "Bewege den Regler. Die Grafik wird direkt im Browser neu berechnet.\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 600\n\nlibrary(shiny)\n\nui &lt;- fluidPage(\n  titlePanel(\"ElmNET – interaktive Grafik\"),\n\n  sidebarLayout(\n    sidebarPanel(\n      sliderInput(\n        inputId = \"anzahl\",\n        label = \"Anzahl der Werte:\",\n        min = 10,\n        max = 500,\n        value = 100,\n        step = 10\n      )\n    ),\n\n    mainPanel(\n      plotOutput(\"grafik\")\n    )\n  )\n)\n\nserver &lt;- function(input, output, session) {\n\n  output$grafik &lt;- renderPlot({\n    set.seed(123)\n\n    werte &lt;- rnorm(input$anzahl)\n\n    hist(\n      werte,\n      breaks = 20,\n      main = paste(\"Verteilung von\", input$anzahl, \"Werten\"),\n      xlab = \"Wert\"\n    )\n  })\n}\n\nshinyApp(ui = ui, server = server)"
-  },
-  {
-    "objectID": "analysen.html",
-    "href": "analysen.html",
-    "title": "analysen.qmd",
-    "section": "",
-    "text": "Zusammenhang zwischen Gewicht und Verbrauch"
-  },
-  {
-    "objectID": "analysen.html#beispielanalyse",
-    "href": "analysen.html#beispielanalyse",
-    "title": "analysen.qmd",
-    "section": "",
-    "text": "Zusammenhang zwischen Gewicht und Verbrauch"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "contact.html",
-    "href": "contact.html",
-    "title": "Contact",
-    "section": "",
-    "text": "Andreas Burger\nUniversity of Greifswald\nGreifswald, Germany\nEmail: burger.a@posteo.de"
-  },
-  {
-    "objectID": "contact.html#section",
-    "href": "contact.html#section",
-    "title": "Contact",
-    "section": "",
-    "text": "Andreas Burger\nUniversity of Greifswald\nGreifswald, Germany\nEmail: burger.a@posteo.de"
   },
   {
     "objectID": "index.html",
@@ -89,5 +54,19 @@
     "title": "Project",
     "section": "Goals",
     "text": "Goals\nElmNET aims to compile a large-scale tree-ring dataset to assess the growth, vitality, and climate sensitivity of U. laevis across Europe and to identify macroclimatic and microclimatic growth differences."
+  },
+  {
+    "objectID": "participation.html",
+    "href": "participation.html",
+    "title": "Participation",
+    "section": "",
+    "text": "We actively welcome further collaborations and data contributions to improve the spatial coverage and representativeness of the dataset.\nAt least 15 sampled trees per site are required, ideally accompanied by metadata and stand information.\nPre-measured tree-ring data are preferred, but tree cores are equally valuable. Contributions from unusual sites, for example particularly dry stands, are especially welcome."
+  },
+  {
+    "objectID": "participation.html#section",
+    "href": "participation.html#section",
+    "title": "Participation",
+    "section": "",
+    "text": "We actively welcome further collaborations and data contributions to improve the spatial coverage and representativeness of the dataset.\nAt least 15 sampled trees per site are required, ideally accompanied by metadata and stand information.\nPre-measured tree-ring data are preferred, but tree cores are equally valuable. Contributions from unusual sites, for example particularly dry stands, are especially welcome."
   }
 ]
