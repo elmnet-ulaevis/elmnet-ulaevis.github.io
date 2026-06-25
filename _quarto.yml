@@ -3,11 +3,14 @@ project:
 
 website:
   title: "ElmNET"
+  site-url: "https://elmnet-ulaevis.github.io/"
+
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd      
+      - href: about.qmd
+        text: Über ElmNET
       - href: app.qmd
         text: Interaktive App
 
@@ -20,4 +23,3 @@ format:
     toc: true
 
 editor: visual
-
