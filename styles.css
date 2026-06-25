@@ -1,1 +1,143 @@
-/* css styles */
+/* ==========================================================
+   ElmNET: map layout and external clickable layer legend
+   Remove older .elmnet-* map/legend rules before adding this.
+   ========================================================== */
+
+.elmnet-map-grid {
+  align-items: start;
+  column-gap: 1.25rem;
+}
+
+.elmnet-map-grid .cell-output-display,
+.elmnet-map-grid .html-widget,
+.elmnet-map-grid .leaflet {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+#elmnet-layer-panel {
+  position: sticky;
+  top: 1rem;
+  min-height: 12rem;
+  width: 100%;
+}
+
+.elmnet-external-layers {
+  position: static !important;
+  float: none !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  max-height: 78vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  border-radius: 0.6rem;
+  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.12);
+  padding: 0.9rem 1rem;
+  box-sizing: border-box;
+}
+
+.elmnet-external-layers .leaflet-control-layers-list {
+  display: block !important;
+  margin: 0;
+}
+
+.elmnet-external-layers .leaflet-control-layers-base,
+.elmnet-external-layers .leaflet-control-layers-separator,
+.elmnet-external-layers .leaflet-control-layers-toggle {
+  display: none !important;
+}
+
+.elmnet-layer-section {
+  padding: 0.15rem 0 0.85rem;
+  margin: 0 0 0.8rem;
+  border-bottom: 1px solid #dddddd;
+}
+
+.elmnet-layer-section:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.elmnet-layer-section h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.elmnet-layer-option {
+  display: grid !important;
+  grid-template-columns: auto 1.35rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.48rem 0;
+  padding: 0;
+  cursor: pointer;
+  line-height: 1.25;
+}
+
+.elmnet-layer-option input {
+  margin: 0;
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+}
+
+.elmnet-layer-symbol {
+  display: inline-block;
+  justify-self: center;
+  flex: 0 0 auto;
+}
+
+.elmnet-symbol-square {
+  width: 1rem;
+  height: 1rem;
+  background: var(--elmnet-symbol-color);
+  border: 1px solid #666666;
+  border-radius: 0.1rem;
+}
+
+.elmnet-symbol-dot {
+  width: 1.05rem;
+  height: 1.05rem;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: var(--elmnet-symbol-color);
+  border: 3px solid var(--elmnet-symbol-border, #555555);
+}
+
+.elmnet-symbol-line {
+  width: 1.35rem;
+  height: 0;
+  border-top: 4px solid var(--elmnet-symbol-color);
+}
+
+.elmnet-symbol-cross {
+  width: 1.3rem;
+  color: var(--elmnet-symbol-color);
+  font-size: 1.75rem;
+  font-weight: 900;
+  line-height: 0.8;
+  text-align: center;
+  -webkit-text-stroke: 1.5px #000000;
+  paint-order: stroke fill;
+}
+
+.elmnet-layer-label {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 991px) {
+  #elmnet-layer-panel {
+    position: static;
+    margin-top: 1rem;
+  }
+
+  .elmnet-external-layers {
+    max-height: none;
+  }
+}
