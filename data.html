@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>analysen.qmd – ElmNET</title>
+<title>Data – ElmNET</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -43,6 +43,11 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<meta name="shinylive:serviceworker_dir" content=".">
+<script src="site_libs/quarto-contrib/shinylive-0.10.12/shinylive/load-shinylive-sw.js" type="module"></script>
+<script src="site_libs/quarto-contrib/shinylive-0.10.12/shinylive/run-python-blocks.js" type="module"></script>
+<link href="site_libs/quarto-contrib/shinylive-0.10.12/shinylive/shinylive.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/shinylive-quarto-css/shinylive-quarto.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -75,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -97,7 +102,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Project</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./data.html"> 
+    <a class="nav-link active" href="./data.html" aria-current="page"> 
 <span class="menu-text">Data</span></a>
   </li>  
   <li class="nav-item">
@@ -119,21 +124,13 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#beispielanalyse" id="toc-beispielanalyse" class="nav-link active" data-scroll-target="#beispielanalyse">Beispielanalyse</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">analysen.qmd</h1>
+<h1 class="title">Data</h1>
 </div>
 
 
@@ -150,18 +147,55 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="beispielanalyse" class="level2">
-<h2 class="anchored" data-anchor-id="beispielanalyse">Beispielanalyse</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="analysen_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Zusammenhang zwischen Gewicht und Verbrauch</figcaption>
-</figure>
-</div>
-</div>
-</div>
+<section id="elmnet-interaktive-analyse" class="level2">
+<h2 class="anchored" data-anchor-id="elmnet-interaktive-analyse">ElmNET – interaktive Analyse</h2>
+<p>Bewege den Regler. Die Grafik wird direkt im Browser neu berechnet.</p>
+<pre class="shinylive-r" data-engine="r"><code>#| '!! shinylive warning !!': |
+#|   shinylive does not work in self-contained HTML documents.
+#|   Please set `embed-resources: false` in your metadata.
+#| standalone: true
+#| viewerHeight: 600
+
+library(shiny)
+
+ui &lt;- fluidPage(
+  titlePanel("ElmNET – interaktive Grafik"),
+
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput(
+        inputId = "anzahl",
+        label = "Anzahl der Werte:",
+        min = 10,
+        max = 500,
+        value = 100,
+        step = 10
+      )
+    ),
+
+    mainPanel(
+      plotOutput("grafik")
+    )
+  )
+)
+
+server &lt;- function(input, output, session) {
+
+  output$grafik &lt;- renderPlot({
+    set.seed(123)
+
+    werte &lt;- rnorm(input$anzahl)
+
+    hist(
+      werte,
+      breaks = 20,
+      main = paste("Verteilung von", input$anzahl, "Werten"),
+      xlab = "Wert"
+    )
+  })
+}
+
+shinyApp(ui = ui, server = server)</code></pre>
 
 
 </section>
