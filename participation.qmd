@@ -1,0 +1,11 @@
+---
+title: "Participation"
+---
+
+## 
+
+We actively welcome further collaborations and data contributions to improve the spatial coverage and representativeness of the dataset.
+
+At least 15 sampled trees per site are required, ideally accompanied by metadata and stand information.
+
+Pre-measured tree-ring data are preferred, but tree cores are equally valuable. Contributions from unusual sites, for example particularly dry stands, are especially welcome.

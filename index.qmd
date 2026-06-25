@@ -1,11 +1,17 @@
 ---
-title: "ElmNET"
+title: "Project"
 ---
 
-This is a Quarto website.
+## ElmNET
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+This ILTER-funded project aims to collect tree-ring data of *Ulmus laevis* across its distribution range throughout Europe. The initial survey addressed approximately 400 managers of potential ILTER sites. However, the project is open to all interested researchers, forestry practitioners, nature conservationists, and others.
 
-```{r}
-1 + 1
-```
+## Background
+
+*Ulmus laevis* is an understudied tree species in dendroecology and forest management. Unlike *Ulmus glabra* and *Ulmus minor*, which were heavily affected by Dutch elm disease, *U. laevis* appears comparatively resilient. However, large-scale analyses of its growth and climate sensitivity are lacking.
+
+## Goals
+
+ElmNET aims to compile a large-scale tree-ring dataset to assess the growth, vitality, and climate sensitivity of *U. laevis* across Europe and to identify macroclimatic and microclimatic growth differences.
+
+## 

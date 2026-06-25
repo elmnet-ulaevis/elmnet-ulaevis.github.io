@@ -1,11 +1,12 @@
 ---
-title: "Interaktive App"
+title: "Data"
 engine: knitr
 format:
   html:
     embed-resources: false
 filters:
   - shinylive
+toc: false
 ---
 
 ## ElmNET – interaktive Analyse

@@ -8,17 +8,17 @@ website:
   navbar:
     left:
       - href: index.qmd
-        text: Home
-      - href: about.qmd
-        text: Über ElmNET
-      - href: app.qmd
-        text: Interaktive App
+        text: Project
+      - href: data.qmd
+        text: Data
+      - href: participation.qmd
+        text: Participation
+      - href: contact.qmd
+        text: Contact
 
 format:
   html:
-    theme:
-      - cosmo
-      - brand
+    theme: cosmo
     css: styles.css
     toc: true
 
