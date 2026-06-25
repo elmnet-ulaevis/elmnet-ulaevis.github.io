@@ -1,5 +1,10 @@
 project:
   type: website
+  render:
+    - index.qmd
+    - data.qmd
+    - participation.qmd
+    - contact.qmd
 
 website:
   title: "ElmNET"
@@ -20,6 +25,6 @@ format:
   html:
     theme: cosmo
     css: styles.css
-    toc: true
+    toc: false
 
 editor: visual
