@@ -8,10 +8,8 @@ format:
     embed-resources: false
 ---
 
-:::: {.grid .elmnet-map-grid}
-
-::: {.g-col-9}
-
+:::::: {.grid .elmnet-map-grid}
+::: g-col-9
 ```{r}
 #| echo: false
 #| warning: false
@@ -28,13 +26,10 @@ invisible(
 
 m
 ```
-
 :::
 
-::: {.g-col-3}
-
-<div id="elmnet-layer-panel" aria-label="Map layers"></div>
-
+:::: g-col-3
+::: {#elmnet-layer-panel aria-label="Map layers"}
 :::
-
 ::::
+::::::

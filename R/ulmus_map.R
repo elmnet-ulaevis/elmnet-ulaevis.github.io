@@ -1,6 +1,6 @@
 # ============================================================
 # ULMUS LAEVIS – INTERACTIVE DISTRIBUTION MAP
-# Corrected version for Quarto / GitHub Pages
+# Complete version for Quarto / GitHub Pages
 # ============================================================
 
 # ------------------------------------------------------------
@@ -21,7 +21,12 @@ required_packages <- c(
 )
 
 missing_packages <- required_packages[
-  !vapply(required_packages, requireNamespace, logical(1), quietly = TRUE)
+  !vapply(
+    required_packages,
+    requireNamespace,
+    logical(1),
+    quietly = TRUE
+  )
 ]
 
 if (length(missing_packages) > 0) {
@@ -35,8 +40,16 @@ if (length(missing_packages) > 0) {
   )
 }
 
-invisible(lapply(required_packages, library, character.only = TRUE))
+invisible(
+  lapply(
+    required_packages,
+    library,
+    character.only = TRUE
+  )
+)
+
 terra::terraOptions(progress = 0)
+
 
 # ------------------------------------------------------------
 # 1. PATHS
@@ -47,7 +60,11 @@ base_path <- paste0(
   "ElmNET/ILTER"
 )
 
-mapping_path <- file.path(base_path, "Work", "Mapping")
+mapping_path <- file.path(
+  base_path,
+  "Work",
+  "Mapping"
+)
 
 dir_ulmus <- file.path(
   mapping_path,
@@ -62,6 +79,7 @@ eea_tif <- file.path(
   "eea_r_3035_1_km_env-zones_p_2018_v01_r00.tif"
 )
 
+
 # ------------------------------------------------------------
 # 2. CHECK PATHS
 # ------------------------------------------------------------
@@ -75,23 +93,31 @@ if (!dir.exists(base_path)) {
 }
 
 if (!dir.exists(dir_ulmus)) {
-  stop("Shapefile directory not found:\n", dir_ulmus)
+  stop(
+    "Shapefile directory not found:\n",
+    dir_ulmus
+  )
 }
 
 if (!file.exists(eea_tif)) {
-  stop("EEA raster not found:\n", eea_tif)
+  stop(
+    "EEA raster not found:\n",
+    eea_tif
+  )
 }
 
+
 # ------------------------------------------------------------
-# 3. OPTIONS
+# 3. MAP OPTIONS
 # ------------------------------------------------------------
 
-# Larger value = faster/smaller map, but coarser raster.
+# Larger values make the map faster and smaller, but coarser.
 agg_fact <- 8
 
 env_opacity <- 0.85
 show_ulmus_outline <- TRUE
 
+# Initial view: Europe.
 map_extent <- c(
   xmin = -25,
   ymin = 34,
@@ -99,14 +125,14 @@ map_extent <- c(
   ymax = 72
 )
 
-# Slightly larger than the visible extent. This limits horizontal
-# world repetition and still allows a little panning.
+# Panning bounds: one world only, including all of Russia.
 map_max_bounds <- c(
-  xmin = -35,
-  ymin = 29,
-  xmax = 58,
-  ymax = 78
+  xmin = -179.9,
+  ymin = 20,
+  xmax = 179.9,
+  ymax = 85
 )
+
 
 # ------------------------------------------------------------
 # 4. COLORS
@@ -122,6 +148,7 @@ col_planned <- "darkorange"
 col_marker_outline <- "black"
 
 col_country_borders <- "#444444"
+
 
 # ------------------------------------------------------------
 # 5. MEASUREMENT LOCATIONS
@@ -155,17 +182,35 @@ meas <- tibble::tribble(
   61.383917,  24.299167, "Finland",         "planned"
 )
 
-required_columns <- c("Latitude", "Longitude", "Country", "Data")
-missing_columns <- setdiff(required_columns, names(meas))
+required_columns <- c(
+  "Latitude",
+  "Longitude",
+  "Country",
+  "Data"
+)
+
+missing_columns <- setdiff(
+  required_columns,
+  names(meas)
+)
 
 if (length(missing_columns) > 0) {
-  stop("Missing columns in meas:\n", paste(missing_columns, collapse = ", "))
+  stop(
+    "Missing columns in meas:\n",
+    paste(missing_columns, collapse = ", ")
+  )
 }
 
-invalid_status <- setdiff(unique(meas$Data), c("available", "planned"))
+invalid_status <- setdiff(
+  unique(meas$Data),
+  c("available", "planned")
+)
 
 if (length(invalid_status) > 0) {
-  stop("Unknown values in meas$Data:\n", paste(invalid_status, collapse = ", "))
+  stop(
+    "Unknown values in meas$Data:\n",
+    paste(invalid_status, collapse = ", ")
+  )
 }
 
 if (
@@ -175,14 +220,18 @@ if (
   stop("Invalid latitude or longitude in meas.")
 }
 
+
 # ------------------------------------------------------------
-# 6. SVG ICON HELPERS
+# 6. SVG MARKER HELPERS
 # ------------------------------------------------------------
 
 svg_to_data_uri <- function(svg) {
   paste0(
     "data:image/svg+xml;utf8,",
-    utils::URLencode(svg, reserved = TRUE)
+    utils::URLencode(
+      svg,
+      reserved = TRUE
+    )
   )
 }
 
@@ -209,11 +258,30 @@ cross_icon_svg <- function(
       'stroke="%s" stroke-width="%d" stroke-linecap="round" />',
       '</svg>'
     ),
-    size_px, size_px, size_px, size_px,
-    mid, mid, size_px, outline_col, outline_px,
-    mid, size_px, mid, outline_col, outline_px,
-    mid, mid, size_px, col, stroke_px,
-    mid, size_px, mid, col, stroke_px
+    size_px,
+    size_px,
+    size_px,
+    size_px,
+    mid,
+    mid,
+    size_px,
+    outline_col,
+    outline_px,
+    mid,
+    size_px,
+    mid,
+    outline_col,
+    outline_px,
+    mid,
+    mid,
+    size_px,
+    col,
+    stroke_px,
+    mid,
+    size_px,
+    mid,
+    col,
+    stroke_px
   )
   
   leaflet::makeIcon(
@@ -242,8 +310,16 @@ point_icon_svg <- function(
       'fill="%s" stroke="%s" stroke-width="%d" />',
       '</svg>'
     ),
-    size_px, size_px, size_px, size_px,
-    mid, mid, radius, col, outline_col, outline_px
+    size_px,
+    size_px,
+    size_px,
+    size_px,
+    mid,
+    mid,
+    radius,
+    col,
+    outline_col,
+    outline_px
   )
   
   leaflet::makeIcon(
@@ -270,8 +346,9 @@ icon_planned <- cross_icon_svg(
   outline_px = 9
 )
 
+
 # ------------------------------------------------------------
-# 7. FIND AND LOAD ULMUS SHAPEFILES
+# 7. LOAD ULMUS DISTRIBUTION DATA
 # ------------------------------------------------------------
 
 shp_files <- list.files(
@@ -282,56 +359,101 @@ shp_files <- list.files(
 )
 
 find_shapefile <- function(filename) {
-  result <- shp_files[tolower(basename(shp_files)) == tolower(filename)]
-  if (length(result) == 0) return(character(0))
+  result <- shp_files[
+    tolower(basename(shp_files)) == tolower(filename)
+  ]
+  
+  if (length(result) == 0) {
+    return(character(0))
+  }
+  
   result[1]
 }
 
-plg_file <- find_shapefile("Ulmus_laevis_plg.shp")
-pnt_file <- find_shapefile("Ulmus_laevis_pnt.shp")
-syn_file <- find_shapefile("Ulmus_laevis_syn_pnt.shp")
+plg_file <- find_shapefile(
+  "Ulmus_laevis_plg.shp"
+)
+
+pnt_file <- find_shapefile(
+  "Ulmus_laevis_pnt.shp"
+)
+
+syn_file <- find_shapefile(
+  "Ulmus_laevis_syn_pnt.shp"
+)
 
 if (length(plg_file) == 0) {
   stop(
     "Required polygon shapefile not found:\n",
-    file.path(dir_ulmus, "Ulmus_laevis_plg.shp")
+    file.path(
+      dir_ulmus,
+      "Ulmus_laevis_plg.shp"
+    )
   )
 }
 
-ulmus_plg <- sf::st_read(plg_file, quiet = TRUE) |>
+ulmus_plg <- sf::st_read(
+  plg_file,
+  quiet = TRUE
+) |>
   sf::st_make_valid()
 
 if (is.na(sf::st_crs(ulmus_plg))) {
-  stop("Polygon shapefile has no CRS:\n", plg_file)
+  stop(
+    "Polygon shapefile has no CRS:\n",
+    plg_file
+  )
 }
 
 ulmus_union <- ulmus_plg |>
   sf::st_union() |>
   sf::st_make_valid()
 
-ulmus_4326 <- sf::st_transform(ulmus_union, 4326)
+ulmus_4326 <- sf::st_transform(
+  ulmus_union,
+  4326
+)
 
 load_optional_sf <- function(file) {
-  if (length(file) == 0) return(NULL)
+  if (length(file) == 0) {
+    return(NULL)
+  }
   
-  object <- sf::st_read(file, quiet = TRUE) |>
+  object <- sf::st_read(
+    file,
+    quiet = TRUE
+  ) |>
     sf::st_make_valid()
   
   if (is.na(sf::st_crs(object))) {
-    stop("Shapefile has no CRS:\n", file)
+    stop(
+      "Shapefile has no CRS:\n",
+      file
+    )
   }
   
-  sf::st_transform(object, 4326)
+  sf::st_transform(
+    object,
+    4326
+  )
 }
 
-ulmus_pnt <- load_optional_sf(pnt_file)
-ulmus_syn <- load_optional_sf(syn_file)
+ulmus_pnt <- load_optional_sf(
+  pnt_file
+)
+
+ulmus_syn <- load_optional_sf(
+  syn_file
+)
+
 
 # ------------------------------------------------------------
-# 8. LOAD AND RECLASSIFY EEA ENVIRONMENTAL-ZONE RASTER
+# 8. LOAD AND RECLASSIFY ENVIRONMENTAL-ZONE RASTER
 # ------------------------------------------------------------
 
-r3035 <- terra::rast(eea_tif)
+r3035 <- terra::rast(
+  eea_tif
+)
 
 if (terra::nlyr(r3035) != 1) {
   stop(
@@ -341,25 +463,42 @@ if (terra::nlyr(r3035) != 1) {
   )
 }
 
-if (is.na(terra::crs(r3035)) || terra::crs(r3035) == "") {
-  stop("EEA raster has no CRS:\n", eea_tif)
+if (
+  is.na(terra::crs(r3035)) ||
+  terra::crs(r3035) == ""
+) {
+  stop(
+    "EEA raster has no CRS:\n",
+    eea_tif
+  )
 }
 
 r_category <- r3035[[1]]
 
 if (!terra::is.factor(r_category)[1]) {
-  stop("The EEA raster is not recognized as a categorical raster.")
+  stop(
+    "The EEA raster is not recognized as a categorical raster."
+  )
 }
 
-category_levels <- terra::levels(r_category)[[1]]
+category_levels <- terra::levels(
+  r_category
+)[[1]]
 
-if (is.null(category_levels) || ncol(category_levels) < 2) {
-  stop("No valid category table was found in the EEA raster.")
+if (
+  is.null(category_levels) ||
+  ncol(category_levels) < 2
+) {
+  stop(
+    "No valid category table was found in the EEA raster."
+  )
 }
 
 category_table <- data.frame(
   raw_id = category_levels[[1]],
-  code = trimws(as.character(category_levels[[2]])),
+  code = trimws(
+    as.character(category_levels[[2]])
+  ),
   stringsAsFactors = FALSE
 )
 
@@ -378,16 +517,26 @@ zone_code_lookup <- tibble::tribble(
 )
 
 category_mapping <- category_table |>
-  dplyr::left_join(zone_code_lookup, by = "code")
+  dplyr::left_join(
+    zone_code_lookup,
+    by = "code"
+  )
 
 used_mapping <- category_mapping |>
-  dplyr::filter(!is.na(new))
+  dplyr::filter(
+    !is.na(new)
+  )
 
 if (nrow(used_mapping) == 0) {
-  stop("None of the EEA category codes could be assigned.")
+  stop(
+    "None of the EEA category codes could be assigned."
+  )
 }
 
-missing_codes <- setdiff(zone_code_lookup$code, category_table$code)
+missing_codes <- setdiff(
+  zone_code_lookup$code,
+  category_table$code
+)
 
 if (length(missing_codes) > 0) {
   warning(
@@ -401,7 +550,9 @@ levels(r_raw) <- NULL
 names(r_raw) <- "environmental_zone_id"
 
 if (terra::is.factor(r_raw)[1]) {
-  stop("The category table could not be removed from the EEA raster.")
+  stop(
+    "The category table could not be removed from the EEA raster."
+  )
 }
 
 r_small <- terra::aggregate(
@@ -416,18 +567,37 @@ ulmus_raster_crs <- sf::st_transform(
   crs = terra::crs(r_raw)
 )
 
-ulmus_v <- terra::vect(ulmus_raster_crs)
+ulmus_v <- terra::vect(
+  ulmus_raster_crs
+)
 
-r_crop <- terra::crop(r_small, terra::ext(ulmus_v))
-r_mask_raw <- terra::mask(r_crop, ulmus_v)
+r_crop <- terra::crop(
+  r_small,
+  terra::ext(ulmus_v)
+)
 
-raw_frequency <- as.data.frame(terra::freq(r_mask_raw))
-present_raw_values <- raw_frequency$value[!is.na(raw_frequency$value)]
-matching_raw_values <- intersect(present_raw_values, used_mapping$raw_id)
+r_mask_raw <- terra::mask(
+  r_crop,
+  ulmus_v
+)
+
+raw_frequency <- as.data.frame(
+  terra::freq(r_mask_raw)
+)
+
+present_raw_values <- raw_frequency$value[
+  !is.na(raw_frequency$value)
+]
+
+matching_raw_values <- intersect(
+  present_raw_values,
+  used_mapping$raw_id
+)
 
 if (length(matching_raw_values) == 0) {
   stop(
-    "No mapped environmental-zone IDs occur inside the Ulmus distribution polygon.\n\n",
+    "No mapped environmental-zone IDs occur inside ",
+    "the Ulmus distribution polygon.\n\n",
     "Raster values found:\n",
     paste(present_raw_values, collapse = ", "),
     "\n\nMapped IDs:\n",
@@ -442,22 +612,30 @@ r_mask <- terra::subst(
   others = NA
 )
 
-# Project once with Leaflet's own helper. This avoids the repeated-world
-# artefact caused by supplying a metre-based EPSG:3857 extent as longitude/
-# latitude while using project = FALSE.
+# Prepare the raster once for Leaflet. Using this helper avoids
+# repeated-world artefacts caused by mismatched coordinate systems.
 r_mask_leaflet <- leaflet::projectRasterForLeaflet(
   raster::raster(r_mask),
   method = "ngb"
 )
 
-raster_values <- raster::getValues(r_mask_leaflet)
+raster_values <- raster::getValues(
+  r_mask_leaflet
+)
+
 
 # ------------------------------------------------------------
-# 9. ENVIRONMENTAL-ZONE GROUPS AND COLORS
+# 9. ENVIRONMENTAL-ZONE GROUPS
 # ------------------------------------------------------------
 
 zone_info <- data.frame(
-  id = c(1L, 2L, 3L, 5L, 4L),
+  id = c(
+    1L,
+    2L,
+    3L,
+    5L,
+    4L
+  ),
   group = c(
     "Environmental zones: Boreal",
     "Environmental zones: Temperate",
@@ -482,8 +660,9 @@ zone_info <- data.frame(
   stringsAsFactors = FALSE
 )
 
+
 # ------------------------------------------------------------
-# 25. LOAD COUNTRY BORDERS INCLUDING WESTERN RUSSIA
+# 10. LOAD COUNTRY BORDERS INCLUDING ALL OF RUSSIA
 # ------------------------------------------------------------
 
 world <- rnaturalearth::ne_countries(
@@ -493,66 +672,131 @@ world <- rnaturalearth::ne_countries(
   sf::st_transform(4326) |>
   sf::st_make_valid()
 
-
-countries <- world |>
+# Europe and neighbouring states, excluding Russia because Russia
+# is processed separately below.
+europe_countries <- world |>
   dplyr::filter(
-    continent == "Europe" |
+    (continent == "Europe" & admin != "Russia") |
       admin %in% c(
         "Turkey",
         "Georgia",
         "Kazakhstan",
         "Armenia",
-        "Azerbaijan",
-        "Russia"
+        "Azerbaijan"
       )
-  )
-
-
-# Split geometries crossing the international date line.
-countries <- suppressWarnings(
-  sf::st_wrap_dateline(
-    countries,
-    options = c(
-      "WRAPDATELINE=YES",
-      "DATELINEOFFSET=10"
-    ),
-    quiet = TRUE
-  )
-) |>
+  ) |>
   sf::st_make_valid()
 
-
-# Create a valid bounding box with the correct names and CRS.
-border_crop_extent <- sf::st_bbox(
+# Keep the European layer compact for faster browser rendering.
+europe_bbox <- sf::st_bbox(
   c(
-    xmin = map_max_bounds[["xmin"]],
-    ymin = map_max_bounds[["ymin"]],
-    xmax = map_max_bounds[["xmax"]],
-    ymax = map_max_bounds[["ymax"]]
+    xmin = -30,
+    ymin = 30,
+    xmax = 70,
+    ymax = 85
   ),
   crs = sf::st_crs(4326)
 )
 
-
-# Crop the borders to Europe and western Russia.
-countries <- suppressWarnings(
+europe_countries <- suppressWarnings(
   sf::st_crop(
-    countries,
-    border_crop_extent
+    europe_countries,
+    europe_bbox
   )
 )
 
-
-countries <- countries[
-  !sf::st_is_empty(countries),
+europe_countries <- europe_countries[
+  !sf::st_is_empty(europe_countries),
 ]
 
-
-borders <- sf::st_boundary(
-  countries
+europe_borders <- sf::st_boundary(
+  europe_countries
 )
+
+# Russia is kept in full. To avoid artificial lines across the map,
+# the boundary is split wherever neighbouring longitudes jump by
+# more than 180 degrees.
+russia <- world |>
+  dplyr::filter(
+    admin == "Russia"
+  ) |>
+  sf::st_make_valid()
+
+split_boundary_at_dateline <- function(x, jump_limit = 180) {
+  boundary_geometry <- sf::st_geometry(
+    sf::st_boundary(x)
+  )
+  
+  boundary_lines <- suppressWarnings(
+    sf::st_cast(
+      boundary_geometry,
+      "LINESTRING"
+    )
+  )
+  
+  segment_matrices <- list()
+  segment_index <- 0L
+  
+  for (i in seq_along(boundary_lines)) {
+    coordinates <- sf::st_coordinates(
+      boundary_lines[i]
+    )
+    
+    if (nrow(coordinates) < 2) {
+      next
+    }
+    
+    coordinates <- coordinates[, c("X", "Y"), drop = FALSE]
+    
+    new_segment <- c(
+      TRUE,
+      abs(diff(coordinates[, "X"])) > jump_limit
+    )
+    
+    segment_groups <- cumsum(new_segment)
+    split_indices <- split(
+      seq_len(nrow(coordinates)),
+      segment_groups
+    )
+    
+    for (indices in split_indices) {
+      if (length(indices) < 2) {
+        next
+      }
+      
+      segment_index <- segment_index + 1L
+      segment_matrices[[segment_index]] <- coordinates[
+        indices,
+        ,
+        drop = FALSE
+      ]
+    }
+  }
+  
+  if (length(segment_matrices) == 0) {
+    stop(
+      "Russia boundary could not be converted into valid line segments."
+    )
+  }
+  
+  sf::st_sf(
+    geometry = sf::st_sfc(
+      lapply(
+        segment_matrices,
+        sf::st_linestring
+      ),
+      crs = 4326
+    )
+  )
+}
+
+russia_borders <- split_boundary_at_dateline(
+  russia
+)
+
+
 # ------------------------------------------------------------
-# 11. CREATE BASE MAP
+# 11. CREATE BASE MAP AND ENVIRONMENTAL-ZONE LAYERS
 # ------------------------------------------------------------
 
 m <- leaflet::leaflet(
@@ -561,23 +805,35 @@ m <- leaflet::leaflet(
   options = leaflet::leafletOptions(
     zoomControl = TRUE,
     attributionControl = FALSE,
-    zoomSnap = 0.05,
-    zoomDelta = 0.05,
-    wheelPxPerZoomLevel = 450,
     worldCopyJump = FALSE,
-    minZoom = 3,
+    minZoom = 2,
+    zoomSnap = 0.25,
+    zoomDelta = 0.25,
+    wheelPxPerZoomLevel = 240,
+    preferCanvas = TRUE,
     maxBoundsViscosity = 1.0
   )
-)
+) |>
+  htmlwidgets::onRender(
+    "
+function(el, x) {
+  var map = this;
+  el.style.backgroundColor = 'white';
 
-# Add each environmental zone as its own toggleable raster layer.
+  var mapContainer = map.getContainer ? map.getContainer() : el;
+  if (mapContainer) {
+    mapContainer.style.backgroundColor = 'white';
+  }
+}
+"
+  )
+
+# Add each environmental zone as a separate selectable layer.
 for (i in seq_len(nrow(zone_info))) {
-  zone_id <- zone_info$id[i]
-  zone_color <- zone_info$color[i]
-  
   zone_values <- ifelse(
-    raster_values == zone_id,
-    zone_id,
+    !is.na(raster_values) &
+      raster_values == zone_info$id[i],
+    zone_info$id[i],
     NA_real_
   )
   
@@ -587,9 +843,9 @@ for (i in seq_len(nrow(zone_info))) {
   )
   
   zone_palette <- leaflet::colorFactor(
-    palette = zone_color,
-    domain = zone_id,
-    na.color = "#00000000"
+    palette = zone_info$color[i],
+    domain = zone_info$id[i],
+    na.color = "transparent"
   )
   
   m <- m |>
@@ -598,19 +854,16 @@ for (i in seq_len(nrow(zone_info))) {
       colors = zone_palette,
       opacity = env_opacity,
       project = FALSE,
+      method = "ngb",
       maxBytes = 20 * 1024 * 1024,
-      group = zone_info$group[i],
-      options = leaflet::gridOptions(
-        noWrap = TRUE,
-        zIndex = 1
-      )
+      group = zone_info$group[i]
     )
 }
 
-# Country borders, now including the western part of Russia.
+# Add European country borders.
 m <- m |>
   leaflet::addPolylines(
-    data = borders,
+    data = europe_borders,
     color = col_country_borders,
     weight = 0.9,
     opacity = 0.9,
@@ -620,8 +873,22 @@ m <- m |>
     )
   )
 
+# Add the complete Russian border.
+m <- m |>
+  leaflet::addPolylines(
+    data = russia_borders,
+    color = col_country_borders,
+    weight = 0.9,
+    opacity = 0.9,
+    options = leaflet::pathOptions(
+      clickable = FALSE,
+      interactive = FALSE
+    )
+  )
+
+
 # ------------------------------------------------------------
-# 12. DISTRIBUTION LAYERS
+# 12. ADD ULMUS DISTRIBUTION LAYERS
 # ------------------------------------------------------------
 
 if (show_ulmus_outline) {
@@ -640,8 +907,13 @@ if (show_ulmus_outline) {
     )
 }
 
-if (!is.null(ulmus_pnt) && nrow(ulmus_pnt) > 0) {
-  isolated_coordinates <- sf::st_coordinates(ulmus_pnt)
+if (
+  !is.null(ulmus_pnt) &&
+  nrow(ulmus_pnt) > 0
+) {
+  isolated_coordinates <- sf::st_coordinates(
+    ulmus_pnt
+  )
   
   m <- m |>
     leaflet::addCircleMarkers(
@@ -661,8 +933,13 @@ if (!is.null(ulmus_pnt) && nrow(ulmus_pnt) > 0) {
     )
 }
 
-if (!is.null(ulmus_syn) && nrow(ulmus_syn) > 0) {
-  introduced_coordinates <- sf::st_coordinates(ulmus_syn)
+if (
+  !is.null(ulmus_syn) &&
+  nrow(ulmus_syn) > 0
+) {
+  introduced_coordinates <- sf::st_coordinates(
+    ulmus_syn
+  )
   
   m <- m |>
     leaflet::addCircleMarkers(
@@ -682,15 +959,20 @@ if (!is.null(ulmus_syn) && nrow(ulmus_syn) > 0) {
     )
 }
 
+
 # ------------------------------------------------------------
-# 13. DATA-AVAILABILITY LAYERS
+# 13. ADD DATA-AVAILABILITY LAYERS
 # ------------------------------------------------------------
 
 available_sites <- meas |>
-  dplyr::filter(Data == "available")
+  dplyr::filter(
+    Data == "available"
+  )
 
 planned_sites <- meas |>
-  dplyr::filter(Data == "planned")
+  dplyr::filter(
+    Data == "planned"
+  )
 
 if (nrow(available_sites) > 0) {
   m <- m |>
@@ -701,7 +983,9 @@ if (nrow(available_sites) > 0) {
       icon = icon_available,
       group = "Data availability: Available",
       popup = ~paste0(
-        "<b>", Country, "</b><br/>Available"
+        "<b>",
+        Country,
+        "</b><br/>Available"
       )
     )
 }
@@ -715,13 +999,16 @@ if (nrow(planned_sites) > 0) {
       icon = icon_planned,
       group = "Data availability: Planned",
       popup = ~paste0(
-        "<b>", Country, "</b><br/>Planned"
+        "<b>",
+        Country,
+        "</b><br/>Planned"
       )
     )
 }
 
+
 # ------------------------------------------------------------
-# 14. LAYER CONTROL, MAP BOUNDS, AND EXTERNAL CLICKABLE LEGEND
+# 14. ADD LAYER CONTROL, BOUNDS, AND EXTERNAL CLICKABLE LEGEND
 # ------------------------------------------------------------
 
 m <- m |>
@@ -756,29 +1043,15 @@ m <- m |>
     "
 function(el, x) {
   var map = this;
-
-  el.style.backgroundColor = 'white';
-  var mapContainer = map.getContainer ? map.getContainer() : el;
-  if (mapContainer) {
-    mapContainer.style.backgroundColor = 'white';
-  }
-
   var attempts = 0;
 
   function buildExternalLayerPanel() {
     attempts += 1;
 
-    var control = el.querySelector('.leaflet-control-layers');
     var panel = document.getElementById('elmnet-layer-panel');
+    var control = el.querySelector('.leaflet-control-layers');
 
-    if (!panel) {
-      panel = document.createElement('div');
-      panel.id = 'elmnet-layer-panel';
-      panel.setAttribute('aria-label', 'Map layers');
-      el.parentNode.insertBefore(panel, el.nextSibling);
-    }
-
-    if (!control) {
+    if (!panel || !control) {
       if (attempts < 100) {
         window.setTimeout(buildExternalLayerPanel, 100);
       }
@@ -789,54 +1062,77 @@ function(el, x) {
       return;
     }
 
-    control.dataset.elmnetReady = 'true';
-    control.classList.add('elmnet-external-layers');
-    control.classList.add('leaflet-control-layers-expanded');
-
-    panel.innerHTML = '';
-    panel.appendChild(control);
-
-    var toggleLink = control.querySelector('.leaflet-control-layers-toggle');
-    if (toggleLink) {
-      toggleLink.style.display = 'none';
-    }
-
     var overlayContainer = control.querySelector(
       '.leaflet-control-layers-overlays'
     );
 
     if (!overlayContainer) {
+      if (attempts < 100) {
+        window.setTimeout(buildExternalLayerPanel, 100);
+      }
       return;
+    }
+
+    control.dataset.elmnetReady = 'true';
+    control.classList.add('elmnet-external-layers');
+    control.classList.add('leaflet-control-layers-expanded');
+
+    var toggleLink = control.querySelector(
+      '.leaflet-control-layers-toggle'
+    );
+
+    if (toggleLink) {
+      toggleLink.style.display = 'none';
     }
 
     var labels = Array.from(
       overlayContainer.querySelectorAll('label')
     );
 
-    overlayContainer.innerHTML = '';
-
     var sections = [
       {
         title: 'Environmental zones',
         prefix: 'Environmental zones:',
         symbols: {
-          'Boreal': {type: 'square', color: '#5E4FA2'},
-          'Temperate': {type: 'square', color: '#66C2A5'},
-          'Atlantic': {type: 'square', color: '#3288BD'},
-          'Pannonian': {type: 'square', color: '#FEE08B'},
-          'Mediterranean': {type: 'square', color: '#F46D43'}
+          'Boreal': {
+            type: 'square',
+            color: '#5E4FA2'
+          },
+          'Temperate': {
+            type: 'square',
+            color: '#66C2A5'
+          },
+          'Atlantic': {
+            type: 'square',
+            color: '#3288BD'
+          },
+          'Pannonian': {
+            type: 'square',
+            color: '#FEE08B'
+          },
+          'Mediterranean': {
+            type: 'square',
+            color: '#F46D43'
+          }
         }
       },
       {
-        title: 'Distribution (U. laevis)',
+        title: 'Distribution (<em>U. laevis</em>)',
         prefix: 'Distribution:',
         symbols: {
-          'Native range': {type: 'line', color: '#B22222'},
+          'Native range': {
+            type: 'line',
+            color: '#B22222'
+          },
           'Isolated populations': {
-            type: 'dot', color: '#CC79A7', border: '#777777'
+            type: 'dot',
+            color: '#CC79A7',
+            border: '#777777'
           },
           'Introduced / naturalized': {
-            type: 'dot', color: '#E6D8AD', border: '#8A7A45'
+            type: 'dot',
+            color: '#E6D8AD',
+            border: '#8A7A45'
           }
         }
       },
@@ -845,50 +1141,62 @@ function(el, x) {
         prefix: 'Data availability:',
         symbols: {
           'Available': {
-            type: 'dot', color: '#40E0D0', border: '#000000'
+            type: 'dot',
+            color: '#40E0D0',
+            border: '#000000'
           },
-          'Planned': {type: 'cross', color: 'darkorange'}
+          'Planned': {
+            type: 'cross',
+            color: 'darkorange'
+          }
         }
       }
     ];
 
-    sections.forEach(function(sectionDefinition) {
+    var sectionElements = sections.map(function(definition) {
       var section = document.createElement('section');
       section.className = 'elmnet-layer-section';
 
       var heading = document.createElement('h3');
-      heading.innerHTML = sectionDefinition.title === 'Distribution (U. laevis)'
-        ? 'Distribution (<em>U. laevis</em>)'
-        : sectionDefinition.title;
+      heading.innerHTML = definition.title;
       section.appendChild(heading);
 
-      labels.forEach(function(label) {
-        var fullLabel = label.textContent.trim();
+      return {
+        definition: definition,
+        element: section
+      };
+    });
 
-        if (!fullLabel.startsWith(sectionDefinition.prefix)) {
+    labels.forEach(function(label) {
+      var fullLabel = label.textContent.trim();
+      var input = label.querySelector('input');
+
+      if (!input) {
+        return;
+      }
+
+      sectionElements.forEach(function(sectionObject) {
+        var definition = sectionObject.definition;
+
+        if (!fullLabel.startsWith(definition.prefix)) {
           return;
         }
 
         var shortLabel = fullLabel
-          .substring(sectionDefinition.prefix.length)
+          .substring(definition.prefix.length)
           .trim();
 
-        var input = label.querySelector('input');
-        if (!input) {
-          return;
-        }
+        var specification = definition.symbols[shortLabel];
 
-        var specification = sectionDefinition.symbols[shortLabel];
-
-        /* Preserve the original Leaflet checkbox node and its event listener. */
-        label.innerHTML = '';
+        label.replaceChildren(input);
         label.className = 'elmnet-layer-option';
-        label.appendChild(input);
 
         if (specification) {
           var symbol = document.createElement('span');
           symbol.className =
-            'elmnet-layer-symbol elmnet-symbol-' + specification.type;
+            'elmnet-layer-symbol elmnet-symbol-' +
+            specification.type;
+
           symbol.style.setProperty(
             '--elmnet-symbol-color',
             specification.color
@@ -913,15 +1221,21 @@ function(el, x) {
         text.textContent = shortLabel;
         label.appendChild(text);
 
-        section.appendChild(label);
+        sectionObject.element.appendChild(label);
       });
-
-      overlayContainer.appendChild(section);
     });
+
+    overlayContainer.replaceChildren(
+      ...sectionElements.map(function(sectionObject) {
+        return sectionObject.element;
+      })
+    );
+
+    panel.replaceChildren(control);
 
     window.setTimeout(function() {
       map.invalidateSize();
-    }, 50);
+    }, 100);
   }
 
   if (map.whenReady) {
@@ -931,9 +1245,21 @@ function(el, x) {
   } else {
     window.setTimeout(buildExternalLayerPanel, 50);
   }
+
+  if (window.ResizeObserver) {
+    var observer = new ResizeObserver(function() {
+      map.invalidateSize();
+    });
+
+    observer.observe(el.parentElement);
+  }
 }
 "
   )
 
-# Return the widget when this script is sourced by data.qmd.
+
+# ------------------------------------------------------------
+# 15. RETURN MAP WIDGET
+# ------------------------------------------------------------
+
 m

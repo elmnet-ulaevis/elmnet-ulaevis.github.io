@@ -1,11 +1,33 @@
 ---
 title: "Participation"
+toc: false
+editor: source
 ---
 
-## 
+<div class="participation-layout">
 
-We actively welcome further collaborations and data contributions to improve the spatial coverage and representativeness of the dataset.
+<div class="participation-text">
 
-At least 15 sampled trees per site are required, ideally accompanied by metadata and stand information.
+We actively welcome collaboration with researchers, institutions, and tree-ring laboratories throughout the distribution range of *Ulmus laevis*.
 
-Pre-measured tree-ring data are preferred, but tree cores are equally valuable. Contributions from unusual sites, for example particularly dry stands, are especially welcome.
+Contributions may consist of previously measured tree-ring series or newly collected increment cores. Sites from underrepresented regions and environmentally unusual locations, particularly dry sites, are especially valuable for the network.
+
+**At least 15 sampled trees per site are required, ideally accompanied by metadata and stand information.**
+
+Researchers interested in contributing data or sampling additional sites are invited to contact the project coordinator.
+
+</div>
+
+<div class="participation-media">
+
+<img class="participation-image" src="images/stem.jpg" alt="Stem of Ulmus laevis">
+
+</div>
+
+</div>
+
+---
+
+**Elm species identification (guide in German):**
+
+[Identification guide for the three native elm species](https://www.waldwissen.net/de/wald/baeume-und-waldpflanzen/laubbaum/die-drei-heimischen-ulmenarten){target="_blank"}

@@ -5,3 +5,4 @@
 .RData
 .Ruserdata
 **/*.quarto_ipynb
+map_cache/

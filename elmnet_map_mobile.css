@@ -1,0 +1,167 @@
+/* ==========================================================
+   ElmNET map layout and external clickable layer legend
+   ========================================================== */
+
+.elmnet-map-layout {
+  align-items: start;
+}
+
+.elmnet-map-column,
+.elmnet-layer-column {
+  min-width: 0;
+}
+
+.elmnet-map-column .leaflet,
+.elmnet-map-column .html-widget {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+#elmnet-layer-panel {
+  position: sticky;
+  top: 1rem;
+  min-height: 8rem;
+}
+
+.elmnet-external-layers {
+  position: static !important;
+  float: none !important;
+  display: block !important;
+  width: 100% !important;
+  max-height: 78vh;
+  margin: 0 !important;
+  padding: 0.95rem 1rem;
+  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  border-radius: 0.6rem;
+  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.12);
+}
+
+.elmnet-external-layers .leaflet-control-layers-list {
+  display: block !important;
+  margin: 0;
+}
+
+.elmnet-external-layers .leaflet-control-layers-separator {
+  display: none;
+}
+
+.elmnet-layer-section {
+  padding: 0.2rem 0 0.85rem;
+  margin: 0 0 0.75rem;
+  border-bottom: 1px solid #dddddd;
+}
+
+.elmnet-layer-section:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: 0;
+}
+
+.elmnet-layer-section h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.elmnet-layer-option {
+  display: grid !important;
+  grid-template-columns: auto 1.25rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.48rem 0;
+  cursor: pointer;
+  line-height: 1.25;
+}
+
+.elmnet-layer-option input {
+  margin: 0;
+}
+
+.elmnet-layer-symbol {
+  display: inline-block;
+  justify-self: center;
+  flex: 0 0 auto;
+}
+
+.elmnet-symbol-square {
+  width: 1rem;
+  height: 1rem;
+  background: var(--elmnet-symbol-color);
+  border: 1px solid #666666;
+  border-radius: 0.1rem;
+}
+
+.elmnet-symbol-dot {
+  width: 1rem;
+  height: 1rem;
+  box-sizing: border-box;
+  background: var(--elmnet-symbol-color);
+  border: 3px solid var(--elmnet-symbol-border, #555555);
+  border-radius: 50%;
+}
+
+.elmnet-symbol-line {
+  width: 1.25rem;
+  height: 0;
+  border-top: 4px solid var(--elmnet-symbol-color);
+}
+
+.elmnet-symbol-cross {
+  width: 1.2rem;
+  color: var(--elmnet-symbol-color);
+  font-size: 1.7rem;
+  font-weight: 900;
+  line-height: 0.8;
+  text-align: center;
+  -webkit-text-stroke: 1.5px #000000;
+  paint-order: stroke fill;
+}
+
+.elmnet-layer-label {
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+/* Tablet and mobile: map first, legend underneath. */
+@media (max-width: 1199.98px) {
+  #elmnet-layer-panel {
+    position: static;
+    margin-top: 1rem;
+  }
+
+  .elmnet-external-layers {
+    max-height: none;
+  }
+
+  .elmnet-map-column .leaflet,
+  .elmnet-map-column .html-widget {
+    height: 62vh !important;
+    min-height: 430px;
+  }
+}
+
+/* Small phones. */
+@media (max-width: 575.98px) {
+  .elmnet-map-column .leaflet,
+  .elmnet-map-column .html-widget {
+    height: 56vh !important;
+    min-height: 350px;
+  }
+
+  .elmnet-external-layers {
+    padding: 0.75rem;
+  }
+
+  .elmnet-layer-section h3 {
+    font-size: 0.96rem;
+  }
+
+  .elmnet-layer-option {
+    gap: 0.4rem;
+    font-size: 0.9rem;
+  }
+}

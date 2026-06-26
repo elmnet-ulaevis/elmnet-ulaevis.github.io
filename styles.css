@@ -1,41 +1,257 @@
 /* ==========================================================
-   ElmNET: map layout and external clickable layer legend
-   Remove older .elmnet-* map/legend rules before adding this.
+   ElmNET – complete website stylesheet
+   Replace the entire existing styles.css with this file.
    ========================================================== */
 
-.elmnet-map-grid {
-  align-items: start;
-  column-gap: 1.25rem;
+:root {
+  --elmnet-radius: 0.65rem;
+  --elmnet-border: #d9dee3;
+  --elmnet-panel-bg: #ffffff;
+  --elmnet-muted-bg: #f7f8f9;
+  --elmnet-text: #212529;
+  --elmnet-muted-text: #5f6872;
 }
 
-.elmnet-map-grid .cell-output-display,
-.elmnet-map-grid .html-widget,
-.elmnet-map-grid .leaflet {
+body {
+  color: var(--elmnet-text);
+}
+
+main.content {
+  max-width: 1400px;
+}
+
+h1,
+h2,
+h3 {
+  scroll-margin-top: 5rem;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  text-underline-offset: 0.16em;
+}
+
+
+/* ----------------------------------------------------------
+   PROJECT PAGE
+   ---------------------------------------------------------- */
+.project-banner-image {
+  display: block;
+  width: 100%;
+  height: 220px;
+  margin: 0 0 1.8rem;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--elmnet-radius);
+}
+
+/*
+  Large logo boxes crop excessive transparent/white margins
+  inside the original PNG files. This makes the actual logos
+  visibly much larger without overlap.
+*/
+.project-logos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  width: 100%;
+  margin: 3rem 0 0;
+  align-items: center;
+}
+
+.project-logo-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.project-logo-box img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
+  object-position: center;
+  transform: scale(0.9);
+}
+
+.project-logo-box-left img {
+  transform-origin: left center;
+}
+
+.project-logo-box-right img {
+  transform-origin: right center;
+}
+
+
+/* ----------------------------------------------------------
+   PARTICIPATION PAGE
+   ---------------------------------------------------------- */
+
+.participation-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 38%);
+  gap: 2rem;
+  align-items: center;
+}
+
+.participation-text {
+  min-width: 0;
+  align-self: center;
+  line-height: 1.45;
+}
+
+.participation-text p {
+  margin-top: 0;
+  margin-bottom: 0.85rem;
+}
+
+.participation-media {
+  display: flex;
+  min-height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.participation-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: var(--elmnet-radius);
+}
+
+/* Compatibility with an older Participation version. */
+.participation-float {
+  float: right;
+  display: block;
+  width: 36%;
+  max-width: 460px;
+  max-height: 420px;
+  margin: 0 0 1.25rem 2rem;
+  object-fit: contain;
+  object-position: center;
+  border-radius: var(--elmnet-radius);
+}
+
+.participation-clear {
+  clear: both;
+}
+
+
+/* ----------------------------------------------------------
+   CONTACT PAGE
+   ---------------------------------------------------------- */
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+  gap: 2rem;
+  align-items: start;
+}
+
+.contact-text {
+  min-width: 0;
+}
+
+.contact-text h2 {
+  margin-top: 0;
+}
+
+.contact-image {
+  display: block;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--elmnet-radius);
+}
+
+/* Compatibility with an older Contact version. */
+.contact-float {
+  float: right;
+  display: block;
+  width: 30%;
+  max-width: 320px;
+  max-height: 380px;
+  margin: 0 0 1.25rem 2rem;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--elmnet-radius);
+}
+
+.contact-clear {
+  clear: both;
+}
+
+
+/* ----------------------------------------------------------
+   DATA PAGE: MAP AND EXTERNAL LAYER PANEL
+   ---------------------------------------------------------- */
+
+.elmnet-map-layout,
+.elmnet-map-grid {
+  align-items: start;
+}
+
+.elmnet-map-column {
+  min-width: 0;
+}
+
+.elmnet-map-column .leaflet,
+.elmnet-map-column .html-widget {
   width: 100% !important;
-  max-width: 100% !important;
+  border-radius: var(--elmnet-radius);
+  overflow: hidden;
+}
+
+.elmnet-map-column .leaflet-container {
+  background: #ffffff;
+  border: 1px solid var(--elmnet-border);
+  border-radius: var(--elmnet-radius);
+}
+
+.elmnet-layer-column {
+  min-width: 0;
 }
 
 #elmnet-layer-panel {
   position: sticky;
-  top: 1rem;
-  min-height: 12rem;
+  top: 5.5rem;
   width: 100%;
+  padding: 0;
+  color: var(--elmnet-text);
 }
 
+#elmnet-layer-panel:empty {
+  display: none;
+}
+
+#elmnet-layer-panel .leaflet-control,
+#elmnet-layer-panel .leaflet-control-layers,
 .elmnet-external-layers {
   position: static !important;
   float: none !important;
-  margin: 0 !important;
   width: 100% !important;
-  max-width: none !important;
-  max-height: 78vh;
-  overflow-y: auto;
-  background: #ffffff;
-  border: 1px solid #d0d0d0;
-  border-radius: 0.6rem;
-  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.12);
-  padding: 0.9rem 1rem;
+  margin: 0 !important;
   box-sizing: border-box;
+  box-shadow: none !important;
+}
+
+.elmnet-external-layers {
+  padding: 0.9rem 1rem 1rem;
+  overflow: visible;
+  background: var(--elmnet-panel-bg);
+  border: 1px solid var(--elmnet-border);
+  border-radius: var(--elmnet-radius);
 }
 
 .elmnet-external-layers .leaflet-control-layers-list {
@@ -43,26 +259,18 @@
   margin: 0;
 }
 
-.elmnet-external-layers .leaflet-control-layers-base,
-.elmnet-external-layers .leaflet-control-layers-separator,
-.elmnet-external-layers .leaflet-control-layers-toggle {
-  display: none !important;
+.elmnet-external-layers .leaflet-control-layers-overlays {
+  display: block;
 }
 
-.elmnet-layer-section {
-  padding: 0.15rem 0 0.85rem;
-  margin: 0 0 0.8rem;
-  border-bottom: 1px solid #dddddd;
-}
-
-.elmnet-layer-section:last-child {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  border-bottom: 0;
+.elmnet-layer-section + .elmnet-layer-section {
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--elmnet-border);
 }
 
 .elmnet-layer-section h3 {
-  margin: 0 0 0.65rem;
+  margin: 0 0 0.55rem;
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.25;
@@ -70,74 +278,280 @@
 
 .elmnet-layer-option {
   display: grid !important;
-  grid-template-columns: auto 1.35rem minmax(0, 1fr);
-  align-items: center;
+  grid-template-columns: 1.05rem 1.4rem minmax(0, 1fr);
   gap: 0.5rem;
-  margin: 0.48rem 0;
-  padding: 0;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0.28rem 0;
   cursor: pointer;
+  font-size: 0.92rem;
   line-height: 1.25;
+  white-space: normal;
 }
 
 .elmnet-layer-option input {
-  margin: 0;
   width: 1rem;
   height: 1rem;
-  cursor: pointer;
+  margin: 0;
+}
+
+.elmnet-layer-label {
+  min-width: 0;
 }
 
 .elmnet-layer-symbol {
   display: inline-block;
   justify-self: center;
+  box-sizing: border-box;
   flex: 0 0 auto;
 }
 
 .elmnet-symbol-square {
-  width: 1rem;
-  height: 1rem;
+  width: 0.9rem;
+  height: 0.9rem;
   background: var(--elmnet-symbol-color);
-  border: 1px solid #666666;
-  border-radius: 0.1rem;
-}
-
-.elmnet-symbol-dot {
-  width: 1.05rem;
-  height: 1.05rem;
-  box-sizing: border-box;
-  border-radius: 50%;
-  background: var(--elmnet-symbol-color);
-  border: 3px solid var(--elmnet-symbol-border, #555555);
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .elmnet-symbol-line {
-  width: 1.35rem;
+  width: 1.25rem;
   height: 0;
-  border-top: 4px solid var(--elmnet-symbol-color);
+  border-top: 3px solid var(--elmnet-symbol-color);
+}
+
+.elmnet-symbol-dot {
+  width: 0.92rem;
+  height: 0.92rem;
+  background: var(--elmnet-symbol-color);
+  border: 2px solid var(--elmnet-symbol-border, #000000);
+  border-radius: 50%;
 }
 
 .elmnet-symbol-cross {
-  width: 1.3rem;
+  width: 1.2rem;
+  height: 1.2rem;
   color: var(--elmnet-symbol-color);
-  font-size: 1.75rem;
-  font-weight: 900;
-  line-height: 0.8;
+  font-size: 1.55rem;
+  font-weight: 800;
+  line-height: 1rem;
   text-align: center;
-  -webkit-text-stroke: 1.5px #000000;
-  paint-order: stroke fill;
+  -webkit-text-stroke: 1px #000000;
 }
 
-.elmnet-layer-label {
-  white-space: normal;
-  overflow-wrap: anywhere;
+.elmnet-external-layers .leaflet-control-layers-separator {
+  display: none;
 }
 
-@media (max-width: 991px) {
+.leaflet-control-zoom a {
+  text-decoration: none;
+}
+
+.leaflet-popup-content {
+  margin: 0.8rem 1rem;
+  line-height: 1.35;
+}
+
+
+/* ----------------------------------------------------------
+   RESPONSIVE LAYOUT
+   ---------------------------------------------------------- */
+
+@media (max-width: 1199.98px) {
   #elmnet-layer-panel {
     position: static;
+    top: auto;
+    margin-top: 1rem;
+  }
+
+  .project-logo-box {
+    height: 170px;
+  }
+
+  .project-logo-box img {
+    transform: scale(1.55);
+  }
+}
+
+@media (max-width: 900px) {
+  .contact-layout,
+  .participation-layout {
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 1.5rem;
+  }
+
+  .participation-image {
+    min-height: 280px;
+  }
+
+  .project-logo-box {
+    height: 140px;
+  }
+
+  .project-logo-box img {
+    transform: scale(1.45);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .project-banner-image {
+    height: 180px;
+  }
+
+  .contact-layout,
+  .participation-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-image,
+  .participation-image {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .contact-image {
+    height: 300px;
+  }
+
+  .participation-media {
+    min-height: 0;
+  }
+
+  .participation-image {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    object-fit: contain;
+  }
+
+  .contact-float,
+  .participation-float {
+    float: none;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .project-logos {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .project-logo-box {
+    height: 140px;
+  }
+
+  .project-logo-box img {
+    transform: scale(1.4);
+    transform-origin: center;
+  }
+
+  #elmnet-layer-panel {
     margin-top: 1rem;
   }
 
   .elmnet-external-layers {
-    max-height: none;
+    padding: 0.85rem 0.9rem;
   }
+}
+
+@media (max-width: 575.98px) {
+  .project-banner-image {
+    height: 150px;
+  }
+
+  .project-logo-box {
+    height: 110px;
+  }
+
+  .project-logo-box img {
+    transform: scale(1.3);
+  }
+
+  .contact-image {
+    height: 260px;
+  }
+
+  .elmnet-layer-option {
+    grid-template-columns: 1rem 1.25rem minmax(0, 1fr);
+    gap: 0.42rem;
+    font-size: 0.88rem;
+  }
+}
+
+
+h1.project-title {
+  font-size: 2rem !important;
+  white-space: nowrap;
+  line-height: 1.15;
+}
+
+@media (max-width: 900px) {
+  h1.project-title {
+    font-size: 1.8rem !important;
+    white-space: normal;
+  }
+}
+
+
+
+/* Participation: schmalere Textspalte links, größeres vollständiges Bild rechts */
+
+.participation-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 52%) minmax(380px, 48%);
+  gap: 1.3rem;
+  align-items: center;
+}
+
+.participation-text {
+  align-self: center;
+  line-height: 1.45;
+}
+
+.participation-text p {
+  margin-top: 0;
+  margin-bottom: 0.85rem;
+}
+
+.participation-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.participation-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 380px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 0.65rem;
+}
+
+@media (max-width: 767.98px) {
+  .participation-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .participation-image {
+    width: 100%;
+    max-width: 560px;
+    max-height: 340px;
+    margin: 0 auto;
+  }
+}
+
+
+
+
+
+
+h1.project-title {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
+  margin-bottom: 2rem;
 }

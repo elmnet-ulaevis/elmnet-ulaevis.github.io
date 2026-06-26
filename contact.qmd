@@ -1,11 +1,26 @@
 ---
 title: "Contact"
+toc: false
+editor: source
 ---
 
-## 
+<div class="contact-layout">
 
-**Andreas Burger**\
-University of Greifswald\
+<div class="contact-text">
+
+## Andreas Burger
+
+University of Greifswald  
 Greifswald, Germany
 
-Email: [burger.a\@posteo.de](mailto:burger.a@posteo.de)
+**Email:** [burger.a@posteo.de](mailto:burger.a@posteo.de)
+
+[University of Greifswald](https://botanik.uni-greifswald.de/landschaftsoekologie-und-oekosystemdynamik/personal/andreas-burger/){target="_blank"}
+
+For questions concerning ElmNET, participation, available tree-ring data, or potential study sites, please get in touch.
+
+</div>
+
+<img class="contact-image" src="images/trees.jpeg" alt="Ulmus laevis trees">
+
+</div>

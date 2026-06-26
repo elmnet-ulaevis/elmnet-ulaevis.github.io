@@ -1,0 +1,42 @@
+/* Participation and Contact pages */
+
+.participation-float,
+.contact-float {
+  float: right;
+  display: block;
+  width: 38%;
+  max-width: 480px;
+  max-height: 620px;
+  margin: 0 0 1.5rem 2.5rem;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0.65rem;
+}
+
+.contact-float {
+  max-height: 560px;
+}
+
+.participation-clear,
+.contact-clear {
+  clear: both;
+}
+
+@media (max-width: 767.98px) {
+  .participation-float,
+  .contact-float {
+    float: none;
+    width: 100%;
+    max-width: none;
+    max-height: 460px;
+    margin: 0 0 1.5rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .participation-float,
+  .contact-float {
+    max-height: 380px;
+    border-radius: 0.4rem;
+  }
+}
