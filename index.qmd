@@ -6,7 +6,7 @@ editor: source
 
 <img class="project-banner-image" src="images/leave.jpg" alt="Leaves of Ulmus laevis">
 
-<h1 class="project-title">A Europe-wide Dendroecological Network for <em>Ulmus laevis</em></h1>
+<h1 class="project-title">ElmNET: A Europe-wide Dendroecological Network for <em>Ulmus laevis</em></h1> Pall.
 
 ## Project
 

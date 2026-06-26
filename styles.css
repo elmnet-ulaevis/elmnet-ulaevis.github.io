@@ -548,10 +548,25 @@ h1.project-title {
 
 
 
-
 h1.project-title {
+  width: 100%;
+  margin: 0 auto 2.4rem;
+  font-size: 2.3rem !important;
+  line-height: 1.18;
+  text-align: center;
+  text-wrap: balance;
+  white-space: normal;
   text-decoration: underline;
   text-decoration-thickness: 2px;
-  text-underline-offset: 0.18em;
-  margin-bottom: 2rem;
+  text-underline-offset: 0.2em;
+}
+
+h1.project-title strong {
+  font-weight: 800;
+}
+
+@media (max-width: 767.98px) {
+  h1.project-title {
+    font-size: 1.95rem !important;
+  }
 }

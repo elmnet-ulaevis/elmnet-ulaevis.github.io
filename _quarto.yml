@@ -5,6 +5,7 @@ project:
     - data.qmd
     - participation.qmd
     - contact.qmd
+    - elmnet_map_runtime_fix.js
 
 website:
   title: "ElmNET"
