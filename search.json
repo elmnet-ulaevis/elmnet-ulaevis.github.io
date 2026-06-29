@@ -14,11 +14,11 @@
     "text": "University of Greifswald\nGreifswald, Germany\nEmail: burger.a@posteo.de\nUniversity of Greifswald\nFor questions concerning ElmNET, participation, available tree-ring data, or potential study sites, please get in touch."
   },
   {
-    "objectID": "index.html#elmnet",
-    "href": "index.html#elmnet",
-    "title": "Project",
-    "section": "ElmNET",
-    "text": "ElmNET\nThis ILTER-funded project aims to collect tree-ring data of Ulmus laevis across its distribution range. The initial survey addressed approximately 400 managers of potential ILTER sites. However, the project is open to all interested researchers, forestry practitioners, nature conservationists, and others.\nElmNET aims to compile a large-scale tree-ring dataset to assess the growth, vitality, and climate sensitivity of U. laevis across its distribution range and to identify macroclimatic and microclimatic growth differences."
+    "objectID": "index.html#project",
+    "href": "index.html#project",
+    "title": "\nElmNET: A Europe-wide Dendroecological Network for Ulmus laevis Pall.\n",
+    "section": "Project",
+    "text": "Project\nThis ILTER-funded project establishes a Europe-wide tree-ring network for Ulmus laevis. It is open to researchers, forestry practitioners, conservationists, and other interested contributors.\nElmNET will provide a harmonized dataset to assess growth, vitality, and climate sensitivity across the species’ distribution range."
   },
   {
     "objectID": "index.html#background",
@@ -40,19 +40,5 @@
     "title": "Participation",
     "section": "",
     "text": "We actively welcome collaboration with researchers, institutions, and tree-ring laboratories throughout the distribution range of Ulmus laevis.\nContributions may consist of previously measured tree-ring series or newly collected increment cores. Sites from underrepresented regions and environmentally unusual locations, particularly dry sites, are especially valuable for the network.\nAt least 15 sampled trees per site are required, ideally accompanied by metadata and stand information.\nResearchers interested in contributing data or sampling additional sites are invited to contact the project coordinator.\n\n\n\n\n\n\nElm species identification (guide in German):\nIdentification guide for the three native elm species"
-  },
-  {
-    "objectID": "index.html#project",
-    "href": "index.html#project",
-    "title": "\nElmNET: A Europe-wide Dendroecological Network for Ulmus laevis Pall.\n",
-    "section": "Project",
-    "text": "Project\nThis ILTER-funded project establishes a Europe-wide tree-ring network for Ulmus laevis. It is open to researchers, forestry practitioners, conservationists, and other interested contributors.\nElmNET will provide a harmonized dataset to assess growth, vitality, and climate sensitivity across the species’ distribution range."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "\nElmNET: A Europe-wide Dendroecological Network for Ulmus laevis\n",
-    "section": "",
-    "text": "Pall."
   }
 ]
